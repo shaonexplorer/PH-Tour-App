@@ -21,8 +21,10 @@ async function startServer() {
 
 startServer();
 
-process.on("unhandledRejection", () => {
+process.on("unhandledRejection", (err) => {
   console.log("server is closing... ");
+  console.log(err);
+
   if (server) {
     server.close(() => {
       process.exit(1);
@@ -32,8 +34,10 @@ process.on("unhandledRejection", () => {
   process.exit(1);
 });
 
-process.on("uncaughtException", () => {
+process.on("uncaughtException", (err) => {
   console.log("server is closing... ");
+  console.log(err);
+
   if (server) {
     server.close(() => {
       process.exit(1);
@@ -43,8 +47,10 @@ process.on("uncaughtException", () => {
   process.exit(1);
 });
 
-process.on("SIGTERM", () => {
+process.on("SIGTERM", (err) => {
   console.log("server is closing... ");
+  console.log(err);
+
   if (server) {
     server.close(() => {
       process.exit(1);
