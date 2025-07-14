@@ -5,7 +5,10 @@ import passport from "passport";
 const router = express.Router();
 
 router.post("/", authController.login);
-router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
+router.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
 router.get(
   "/google/callback",
   passport.authenticate("google", {
