@@ -25,7 +25,7 @@ passport.use(
     ) => {
       try {
         const isUserExist = await User.findOne({
-          email: profile.emails[0].value,
+          email: profile.emails?.[0].value,
         });
 
         console.log(isUserExist);
@@ -33,8 +33,8 @@ passport.use(
         if (!isUserExist) {
           const newUser = await User.create({
             name: profile.displayName,
-            email: profile.emails[0].value,
-            picture: profile.photos[0].value,
+            email: profile.emails?.[0].value,
+            picture: profile.photos?.[0].value,
             isVerified: true,
             role: Role.USER,
             auths: [{ provider: "google", providerId: profile.id }],
