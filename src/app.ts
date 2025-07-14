@@ -1,13 +1,21 @@
 import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { UserRouter } from "./app/modules/user/user.routes";
-import { success } from "zod";
 import { authRouter } from "./app/modules/auth/auth.routes";
+import "./config/passport.js";
+import passport from "passport";
+import expressSession from "express-session";
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(
+  expressSession({ secret: "abir", resave: false, saveUninitialized: false })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get("/api/v1", (req, res) => {
   res.send("welcome to  PH tour");
