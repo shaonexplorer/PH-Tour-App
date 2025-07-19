@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { catchAsync } from "../../../utils/catchAsync";
+import { catchAsync } from "../../utils/catchAsync";
 import passport from "passport";
 import { IUser } from "../user/user.interface";
 import jwt from "jsonwebtoken";

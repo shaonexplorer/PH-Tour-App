@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { userServices } from "./user.service";
-import { catchAsync } from "../../../utils/catchAsync";
-import { sendResponse } from "../../../utils/sendResponse";
+import { catchAsync } from "../../utils/catchAsync";
+import { sendResponse } from "../../utils/sendResponse";
 
 const getUsers = catchAsync(async (req: Request, res: Response) => {
   const users = await userServices.getUsers(req);

@@ -3,7 +3,7 @@ import { IUser, Role } from "./user.interface";
 import bcrypt from "bcrypt";
 import { Request } from "express";
 import jwt from "jsonwebtoken";
-import { QueryBuilder } from "../../../utils/queryBuilder";
+import { QueryBuilder } from "../../utils/queryBuilder";
 
 const createUser = async (body: Partial<IUser>) => {
   const hashedPassword = await bcrypt.hash(body.password as string, 10);

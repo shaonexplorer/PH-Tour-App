@@ -1,7 +1,7 @@
 import { Request } from "express";
 import { ITourType } from "./interface.tour";
 import { Tour, TourType } from "./tour.model";
-import { QueryBuilder } from "../../../utils/queryBuilder";
+import { QueryBuilder } from "../../utils/queryBuilder";
 
 const createTourType = async (payload: Partial<ITourType>) => {
   const tourType = await TourType.create(payload);

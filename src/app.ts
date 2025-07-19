@@ -2,7 +2,7 @@ import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import { UserRouter } from "./app/modules/user/user.routes";
 import { authRouter } from "./app/modules/auth/auth.routes";
-import "./config/passport.js";
+import "./app/config/passport.js";
 import passport from "passport";
 import expressSession from "express-session";
 import { divisionRouter } from "./app/modules/division/division.routes";

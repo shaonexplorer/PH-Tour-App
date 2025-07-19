@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { catchAsync } from "../../../utils/catchAsync";
+import { catchAsync } from "../../utils/catchAsync";
 import { tourServices } from "./services.tour";
-import { sendResponse } from "../../../utils/sendResponse";
+import { sendResponse } from "../../utils/sendResponse";
 
 const createTourType = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {

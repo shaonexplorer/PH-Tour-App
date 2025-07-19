@@ -7,8 +7,8 @@ import { Strategy as LocalStrategy } from "passport-local";
 
 import bcrypt from "bcrypt";
 import "dotenv/config";
-import { IUser, Role } from "../app/modules/user/user.interface";
-import { User } from "../app/modules/user/user.model";
+import { User } from "../modules/user/user.model";
+import { IUser, Role } from "../modules/user/user.interface";
 
 const client_id = process.env.client_id as string;
 const client_secret = process.env.client_secret as string;
