@@ -4,7 +4,8 @@ import passport from "passport";
 
 const router = express.Router();
 
-router.post("/", authController.login);
+router.post("/login", authController.login);
+
 router.get(
   "/google",
   passport.authenticate("google", { scope: ["profile", "email"] })

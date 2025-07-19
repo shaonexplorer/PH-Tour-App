@@ -5,6 +5,8 @@ import { authRouter } from "./app/modules/auth/auth.routes";
 import "./config/passport.js";
 import passport from "passport";
 import expressSession from "express-session";
+import { divisionRouter } from "./app/modules/division/division.routes";
+import { tourRouter } from "./app/modules/tour/tour.routes";
 
 const app = express();
 
@@ -24,6 +26,10 @@ app.get("/api/v1", (req, res) => {
 app.use("/api/v1/user", UserRouter);
 
 app.use("/api/v1/auth", authRouter);
+
+app.use("/api/v1/division", divisionRouter);
+
+app.use("/api/v1/tour", tourRouter);
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(400).json({

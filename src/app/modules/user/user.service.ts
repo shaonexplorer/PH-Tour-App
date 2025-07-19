@@ -3,6 +3,7 @@ import { IUser, Role } from "./user.interface";
 import bcrypt from "bcrypt";
 import { Request } from "express";
 import jwt from "jsonwebtoken";
+import { QueryBuilder } from "../../../utils/queryBuilder";
 
 const createUser = async (body: Partial<IUser>) => {
   const hashedPassword = await bcrypt.hash(body.password as string, 10);
@@ -15,9 +16,17 @@ const createUser = async (body: Partial<IUser>) => {
   return newUser;
 };
 
-const getUsers = async () => {
-  const allUsers = await User.find();
-  return allUsers;
+const getUsers = async (req: Request) => {
+  // const allUsers = await User.find();
+  // return allUsers;
+
+  const query = new QueryBuilder(User.find(), req.query);
+  const result = await query
+    .pagination()
+    .search(["name", "email"])
+    .sort()
+    .selectFields().modelQuery;
+  return result;
 };
 
 const updateUser = async (req: Request) => {

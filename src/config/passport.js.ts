@@ -3,12 +3,48 @@ import {
   Strategy as googleStrategy,
   VerifyCallback,
 } from "passport-google-oauth20";
+import { Strategy as LocalStrategy } from "passport-local";
+
+import bcrypt from "bcrypt";
 import "dotenv/config";
 import { IUser, Role } from "../app/modules/user/user.interface";
 import { User } from "../app/modules/user/user.model";
 
 const client_id = process.env.client_id as string;
 const client_secret = process.env.client_secret as string;
+
+// local credential login
+
+passport.use(
+  new LocalStrategy(
+    { usernameField: "email", passwordField: "password" },
+    async (email, password, done) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          return done("email not found");
+        }
+
+        const isPasswordMatch = await bcrypt.compare(
+          password,
+          user.password as string
+        );
+
+        if (!isPasswordMatch) {
+          return done("password do not match");
+        }
+
+        done(null, user);
+      } catch (error) {
+        console.log(error);
+        return done(error);
+      }
+    }
+  )
+);
+
+// google oauth
 
 passport.use(
   new googleStrategy(
@@ -27,8 +63,6 @@ passport.use(
         const isUserExist = await User.findOne({
           email: profile.emails?.[0].value,
         });
-
-        console.log(isUserExist);
 
         if (!isUserExist) {
           const newUser = await User.create({
