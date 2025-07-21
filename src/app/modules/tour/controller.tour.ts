@@ -35,4 +35,34 @@ const getAllTours = catchAsync(
   }
 );
 
-export const TourController = { createTourType, createTour, getAllTours };
+const getSingleTour = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { slug } = req.params;
+    const tour = await tourServices.getSingleTour(slug);
+    sendResponse(res, {
+      status: 200,
+      success: true,
+      data: tour,
+    });
+  }
+);
+
+const updateTour = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const tour = await tourServices.updateTour(id, req);
+    sendResponse(res, {
+      status: 200,
+      success: true,
+      data: tour,
+    });
+  }
+);
+
+export const TourController = {
+  createTourType,
+  createTour,
+  getAllTours,
+  getSingleTour,
+  updateTour,
+};

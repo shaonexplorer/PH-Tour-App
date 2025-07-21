@@ -7,6 +7,7 @@ import passport from "passport";
 import expressSession from "express-session";
 import { divisionRouter } from "./app/modules/division/division.routes";
 import { tourRouter } from "./app/modules/tour/tour.routes";
+import { BookingRouter } from "./app/modules/booking/booking.routes";
 
 const app = express();
 
@@ -30,6 +31,8 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/division", divisionRouter);
 
 app.use("/api/v1/tour", tourRouter);
+
+app.use("/api/v1/booking", BookingRouter);
 
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(400).json({

@@ -59,4 +59,22 @@ const getAllTours = async (req: Request) => {
   return { result, totalCount, page, totalPage, limit };
 };
 
-export const tourServices = { createTourType, createTour, getAllTours };
+const getSingleTour = async (slug: string) => {
+  const tour = await Tour.findOne({ slug });
+  return tour;
+};
+
+const updateTour = async (id: string, req: Request) => {
+  const tour = await Tour.findOneAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+  return tour;
+};
+
+export const tourServices = {
+  createTourType,
+  createTour,
+  getAllTours,
+  getSingleTour,
+  updateTour,
+};

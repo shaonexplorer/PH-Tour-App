@@ -54,14 +54,14 @@ router.post(
   TourController.createTour
 );
 
-// router.get("/:slug", TourController.getSingleTour);
+router.get("/:slug", TourController.getSingleTour);
 
-// router.patch(
-//   "/:id",
-//   authenticateByRoles(Role.ADMIN, Role.SUPER_ADMIN),
-//   zodValidation(updateTourZodSchema),
-//   TourController.updateTour
-// );
+router.patch(
+  "/:id",
+  authenticateByRoles(Role.ADMIN, Role.SUPER_ADMIN),
+  zodValidation(updateTourZodSchema),
+  TourController.updateTour
+);
 
 // router.delete(
 //   "/:id",
